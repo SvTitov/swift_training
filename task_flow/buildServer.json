@@ -1,0 +1,18 @@
+{
+    "name": "xcode build server",
+    "version": "1.3.0",
+    "bspVersion": "2.2.0",
+    "languages": [
+        "c",
+        "cpp",
+        "objective-c",
+        "objective-cpp",
+        "swift"
+    ],
+    "argv": [
+        "/opt/homebrew/bin/xcode-build-server"
+    ],
+    "project": "/Users/svyatoslavtitov/Projects/swift/training/task_flow/task_flow.xcodeproj",
+    "build_root": "/Users/svyatoslavtitov/Library/Developer/Xcode/DerivedData/task_flow-bsngxlhltvvzoobtwowgknohujpt",
+    "kind": "xcode"
+}
