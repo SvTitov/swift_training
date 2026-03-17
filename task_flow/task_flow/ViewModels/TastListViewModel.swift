@@ -6,22 +6,24 @@ import os
 
 @Observable
 final class TaskListViewModel {
+    // MARK: Public
     var selectedFilterItem: String = "1" {
         didSet {
             onSelectedFilterChanged.send(selectedFilterItem)
         }
     }
-
     var filteredList: [TaskModel] = []
     var isLoading = true
 
+    // MARK: Private
     private var cancellables = Set<AnyCancellable>()
+    private var onSelectedFilterChanged = CurrentValueSubject<String, Never>("")
+    private let domain = TaskListDomain()
     private var originList: [TaskModel] = [] {
         didSet {
             filteredList = originList
         }
     }
-    private var onSelectedFilterChanged = CurrentValueSubject<String, Never>("")
 
     init() {
         onSelectedFilterChanged.debounce(for: 2, scheduler: RunLoop.main)
@@ -31,10 +33,12 @@ final class TaskListViewModel {
             .store(in: &cancellables)
     }
 
-    func onAppear(storage: any PersistentRepositoryProtocol<TaskEntity, TaskModel>) async {
+    func onAppear(
+        storage: any PersistentRepositoryProtocol<TaskEntity, TaskModel>, network: NetworkRepository
+    ) async {
         do {
-            // let result = try await storage.fetchAll()
-            // originList = result.map { .map(from: $0) }
+            let result = try await domain.fetchTasks(repo: storage, remote: network)
+            originList = result
         } catch {
             Logger.app.error("Couldn't fetch all data. Error: \(error)")
         }

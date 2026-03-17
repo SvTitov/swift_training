@@ -2,9 +2,11 @@ import Foundation
 import SwiftData
 
 struct TaskListDomain {
-    func fetchTasks<Repo: PersistentRepositoryProtocol>(repo: Repo, remote: NetworkRepository)
+    func fetchTasks(
+        repo: any PersistentRepositoryProtocol<TaskEntity, TaskModel>, remote: NetworkRepository
+    )
         async throws -> [TaskModel]
-    where Repo.Entity == TaskEntity, Repo.Model == TaskModel {
+    {
         // 1. Check for DB
         // 2. Load data from remote
         // 3. Merge

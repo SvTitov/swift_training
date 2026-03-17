@@ -4,11 +4,12 @@ import SwiftUI
 
 struct TaskListScreen: View {
     let testSource = ["all", "1", "2", "3"]
-    @State var selectedItem: String = "Filter"
-    @Bindable var viewModel = TaskListViewModel()
+    @State private var selectedItem: String = "Filter"
+    @Bindable private var viewModel = TaskListViewModel()
 
     @State var storage: (any PersistentRepositoryProtocol<TaskEntity, TaskModel>)?
-    @Environment(\.modelContext) var modelContext
+    @Environment(\.modelContext) private var modelContext
+    @Environment(\.network) private var network
 
     var body: some View {
         VStack {
@@ -44,7 +45,7 @@ struct TaskListScreen: View {
             }
             guard let storage else { return }
 
-            await viewModel.onAppear(storage: storage)
+            await viewModel.onAppear(storage: storage, network: network)
         }
     }
 }
