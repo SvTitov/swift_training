@@ -24,6 +24,7 @@ final class TaskListViewModel {
             filteredList = originList
         }
     }
+    private var bgService: BackgroundService?
 
     init() {
         onSelectedFilterChanged.debounce(for: 2, scheduler: RunLoop.main)
@@ -39,6 +40,12 @@ final class TaskListViewModel {
         do {
             let result = try await domain.fetchTasks(repo: storage, remote: network)
             originList = result
+
+            if bgService == nil {
+                bgService = BackgroundService(
+                    syncService: SyncService(storage: storage, network: network))
+            }
+
         } catch {
             Logger.app.error("Couldn't fetch all data. Error: \(error)")
         }
@@ -48,5 +55,13 @@ final class TaskListViewModel {
         filteredList = originList.filter { item in
             item.title.contains(value)
         }
+    }
+
+    func prepareBackground() {
+        self.bgService?.pepare()
+    }
+
+    func runBackground() async {
+        await self.bgService?.run()
     }
 }

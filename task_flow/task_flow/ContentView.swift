@@ -1,10 +1,3 @@
-//
-//  ContentView.swift
-//  task_flow
-//
-//  Created by Svyatoslav Titov on 10.03.2026.
-//
-
 import SwiftUI
 
 struct ContentView: View {
@@ -15,11 +8,6 @@ struct ContentView: View {
                 .imageScale(.large)
                 .foregroundStyle(.tint)
             Text("New content")
-                .onTapGesture {
-                    let a = 5
-                    let b = 6
-                    print("HELLO")
-                }
         }
         .padding()
     }

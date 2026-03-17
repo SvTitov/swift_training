@@ -5,11 +5,14 @@ public actor SyncService {
 
     var state: State = .stopped
 
-    var storage: PersistentRepository<TaskEntity, TaskModel>
-    var network: NetworkRepository
+    weak var storage: (any PersistentRepositoryProtocol<TaskEntity, TaskModel>)?
+    weak var network: NetworkRepository?
+
     var runningTask: Task<(), Never>?
 
-    init(storage: PersistentRepository<TaskEntity, TaskModel>, network: NetworkRepository) {
+    init(
+        storage: any PersistentRepositoryProtocol<TaskEntity, TaskModel>, network: NetworkRepository
+    ) {
         self.storage = storage
         self.network = network
     }
@@ -48,10 +51,14 @@ public actor SyncService {
     }
 
     private func innerRunning() async throws {
+        guard let storage, let network else {
+            return
+        }
+
         self.changeState(.running)
 
         let allowedStatuse = [SyncStatus.pending.rawValue, SyncStatus.conflict.rawValue]
-        let items = try await self.storage.fetch(
+        let items = try await storage.fetch(
             predicate: #Predicate<TaskEntity> { item in
                 allowedStatuse.contains(item.syncStatus.rawValue)
             })
@@ -60,7 +67,7 @@ public actor SyncService {
             switch item.syncStatus {
             case .pending:
                 // If it's needed to be sync
-                let (code, _) = try await self.network.post(
+                let (code, _) = try await network.post(
                     TaskResponseDto.self, resource: "", body: TaskDto.stub())
 
                 if code == 200 {
@@ -78,7 +85,7 @@ public actor SyncService {
         let isSynced = items.allSatisfy { $0.syncStatus == .synced }
         if isSynced { changeState(.done) }
 
-        try? await self.storage.commit()
+        try await storage.updateBatch(items)
     }
 
     func changeState(_ state: State) {

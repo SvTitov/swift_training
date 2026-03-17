@@ -10,6 +10,7 @@ struct TaskListScreen: View {
     @State var storage: (any PersistentRepositoryProtocol<TaskEntity, TaskModel>)?
     @Environment(\.modelContext) private var modelContext
     @Environment(\.network) private var network
+    @Environment(\.scenePhase) private var scenePhase
 
     var body: some View {
         VStack {
@@ -46,6 +47,15 @@ struct TaskListScreen: View {
             guard let storage else { return }
 
             await viewModel.onAppear(storage: storage, network: network)
+            viewModel.prepareBackground()
+        }
+        .onChange(of: scenePhase) {
+            switch scenePhase {
+            case .background:
+                Task { await viewModel.runBackground() }
+            default:
+                break
+            }
         }
     }
 }

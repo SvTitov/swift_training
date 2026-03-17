@@ -23,6 +23,7 @@ protocol PersistentRepositoryProtocol<Entity, Model>: Actor {
     func delete(_ element: Model) throws
     func delete(predicate: Predicate<Entity>) throws
     func update(_ model: Model) throws
+    func updateBatch(_ models: [Model]) throws
     func commit() throws
     func count() throws -> Int
 }
@@ -122,6 +123,27 @@ where E.Model == M, M.Entity == E {
         let descr = FetchDescriptor<Entity>()
         return try modelContext.fetchCount(descr)
     }
+
+    func updateBatch(_ models: [M]) throws {
+        let models = Dictionary(grouping: models, by: { $0.id })
+
+        let keys = models.map { $0.key }
+        let predicate = #Predicate<Entity> { keys.contains($0.id) }
+        let descr = FetchDescriptor(predicate: predicate)
+        let entities = Dictionary(grouping: try modelContext.fetch(descr), by: { $0.id })
+
+        entities.forEach {
+            guard let model = models[$0.key]?.first, let entity = $0.value.first else {
+                return
+            }
+
+            entity.update(model)
+        }
+
+        if modelContext.hasChanges {
+            try modelContext.save()
+        }
+    }
 }
 
 actor PersistentRepositoryMock<E: EntityProtocol, M: ModelProtocol>: PersistentRepositoryProtocol
@@ -146,4 +168,6 @@ where E.Model == M, M.Entity == E {
     func update(_ model: Model) throws {}
 
     func count() throws -> Int { -1 }
+
+    func updateBatch(_ models: [M]) throws {}
 }
