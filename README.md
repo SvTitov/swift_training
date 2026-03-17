@@ -1,1 +1,1 @@
-# Bunch of training projects make with SwiftUI
+# Bunch of training projects made with SwiftUI
