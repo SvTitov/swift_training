@@ -12,7 +12,7 @@ protocol EntityProtocol: AnyObject, Identifiable, PersistentModel where ID == UU
     init(model: Model)
 }
 
-protocol PersistentRepositoryProtocol: Actor {
+protocol PersistentRepositoryProtocol<Entity, Model>: Actor {
     associatedtype Entity: EntityProtocol
     associatedtype Model: ModelProtocol
 
@@ -24,6 +24,7 @@ protocol PersistentRepositoryProtocol: Actor {
     func delete(predicate: Predicate<Entity>) throws
     func update(_ model: Model) throws
     func commit() throws
+    func count() throws -> Int
 }
 
 @ModelActor
@@ -116,6 +117,11 @@ where E.Model == M, M.Entity == E {
             try modelContext.save()
         }
     }
+
+    func count() throws -> Int {
+        let descr = FetchDescriptor<Entity>()
+        return try modelContext.fetchCount(descr)
+    }
 }
 
 actor PersistentRepositoryMock<E: EntityProtocol, M: ModelProtocol>: PersistentRepositoryProtocol
@@ -138,4 +144,6 @@ where E.Model == M, M.Entity == E {
     func insertBatch(_ elements: [M]) throws {}
 
     func update(_ model: Model) throws {}
+
+    func count() throws -> Int { -1 }
 }

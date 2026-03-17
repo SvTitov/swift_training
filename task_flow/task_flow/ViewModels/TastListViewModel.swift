@@ -4,10 +4,16 @@ import SwiftData
 import SwiftUI
 import os
 
-class TaskListViewModel: ObservableObject {
-    @Published var selectedFilterItem: String = "1"
-    @Published var filteredList: [TaskModel] = []
-    @Published var isLoading = true
+@Observable
+final class TaskListViewModel {
+    var selectedFilterItem: String = "1" {
+        didSet {
+            onSelectedFilterChanged.send(selectedFilterItem)
+        }
+    }
+
+    var filteredList: [TaskModel] = []
+    var isLoading = true
 
     private var cancellables = Set<AnyCancellable>()
     private var originList: [TaskModel] = [] {
@@ -15,17 +21,17 @@ class TaskListViewModel: ObservableObject {
             filteredList = originList
         }
     }
+    private var onSelectedFilterChanged = CurrentValueSubject<String, Never>("")
 
     init() {
-        $selectedFilterItem.throttle(for: 2, scheduler: RunLoop.main, latest: true)
+        onSelectedFilterChanged.debounce(for: 2, scheduler: RunLoop.main)
             .sink { [unowned self] item in
                 self.handleFilterChanged(value: item)
             }
             .store(in: &cancellables)
     }
 
-    func onAppear<Repo: PersistentRepositoryProtocol>(storage: Repo) async
-    where Repo.Entity == TaskEntity {
+    func onAppear(storage: any PersistentRepositoryProtocol<TaskEntity, TaskModel>) async {
         do {
             // let result = try await storage.fetchAll()
             // originList = result.map { .map(from: $0) }

@@ -3,12 +3,12 @@ import SwiftData
 import SwiftUI
 
 struct TaskListScreen: View {
-
     let testSource = ["all", "1", "2", "3"]
     @State var selectedItem: String = "Filter"
-    @StateObject var viewModel = TaskListViewModel()
+    @Bindable var viewModel = TaskListViewModel()
 
-    @State var storage: PersistentRepository<TaskEntity, TaskModel>?
+    @State var storage: (any PersistentRepositoryProtocol<TaskEntity, TaskModel>)?
+    @Environment(\.modelContext) var modelContext
 
     var body: some View {
         VStack {
@@ -37,15 +37,18 @@ struct TaskListScreen: View {
                 .listStyle(.inset)
             }
         }
-        .onAppear {
+        .task {
             if storage == nil {
-                // storage = PersistentRepository<TaskEntity>(modelContainer: modelContext.
+                storage = PersistentRepository<TaskEntity, TaskModel>(
+                    modelContainer: modelContext.container)
             }
-            Task { await viewModel.onAppear(storage: storage!) }
+            guard let storage else { return }
+
+            await viewModel.onAppear(storage: storage)
         }
     }
 }
 
 #Preview {
-    TaskListScreen()
+    TaskListScreen(storage: PersistentRepositoryMock<TaskEntity, TaskModel>())
 }
