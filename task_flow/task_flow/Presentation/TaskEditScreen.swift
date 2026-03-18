@@ -65,6 +65,8 @@ struct TaskEditScreen: View {
                     .foregroundColor(.red)
                 Text("Conflict")
                     .font(.caption)
+            case .any:
+                EmptyView()
             }
         }
     }

@@ -7,7 +7,7 @@ import os
 @Observable
 final class TaskListViewModel {
     // MARK: Public
-    var selectedFilterItem: String = "1" {
+    var selectedFilterItem: SyncStatus = .any {
         didSet {
             onSelectedFilterChanged.send(selectedFilterItem)
         }
@@ -17,7 +17,7 @@ final class TaskListViewModel {
 
     // MARK: Private
     private var cancellables = Set<AnyCancellable>()
-    private var onSelectedFilterChanged = CurrentValueSubject<String, Never>("")
+    private var onSelectedFilterChanged = CurrentValueSubject<SyncStatus, Never>(.any)
     private let domain = TaskListDomain()
     private var originList: [TaskModel] = [] {
         didSet {
@@ -27,7 +27,7 @@ final class TaskListViewModel {
     private var bgService: BackgroundService?
 
     init() {
-        onSelectedFilterChanged.debounce(for: 2, scheduler: RunLoop.main)
+        onSelectedFilterChanged.debounce(for: 0.4, scheduler: RunLoop.main)
             .sink { [unowned self] item in
                 self.handleFilterChanged(value: item)
             }
@@ -37,23 +37,34 @@ final class TaskListViewModel {
     func onAppear(
         storage: any PersistentRepositoryProtocol<TaskEntity, TaskModel>, network: NetworkRepository
     ) async {
-        do {
-            let result = try await domain.fetchTasks(repo: storage, remote: network)
-            originList = result
-
-            if bgService == nil {
-                bgService = BackgroundService(
-                    syncService: SyncService(storage: storage, network: network))
-            }
-
-        } catch {
-            Logger.app.error("Couldn't fetch all data. Error: \(error)")
+        if bgService == nil {
+            bgService = BackgroundService(
+                syncService: SyncService(storage: storage, network: network))
         }
+
+        await refresh(storage, network)
     }
 
-    private func handleFilterChanged(value: String) {
-        filteredList = originList.filter { item in
-            item.title.contains(value)
+    func refresh(
+        _ storage: any PersistentRepositoryProtocol<TaskEntity, TaskModel>,
+        _ network: NetworkRepository
+    ) async {
+        do {
+            isLoading = true
+            defer {
+                isLoading = false
+            }
+
+            async let fetching = domain.fetchTasks(repo: storage, remote: network)
+            async let syncTasks = domain.syncTasks(repo: storage, network: network)
+
+            let (tasks, _) = await (try? fetching, syncTasks)
+
+            if let tasks {
+                originList = tasks
+            }
+        } catch {
+            Logger.app.error("Couldn't fetch all data. Error: \(error)")
         }
     }
 
@@ -63,5 +74,15 @@ final class TaskListViewModel {
 
     func runBackground() async {
         await self.bgService?.run()
+    }
+
+    private func handleFilterChanged(value: SyncStatus) {
+        filteredList = originList.filter { item in
+            if value == .any {
+                true
+            } else {
+                item.syncStatus == value
+            }
+        }
     }
 }

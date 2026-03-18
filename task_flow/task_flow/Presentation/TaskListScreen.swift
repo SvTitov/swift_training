@@ -3,11 +3,12 @@ import SwiftData
 import SwiftUI
 
 struct TaskListScreen: View {
-    let testSource = ["all", "1", "2", "3"]
     @State private var selectedItem: String = "Filter"
     @Bindable private var viewModel = TaskListViewModel()
 
     @State var storage: (any PersistentRepositoryProtocol<TaskEntity, TaskModel>)?
+    @EnvironmentObject var navigator: Navigator
+
     @Environment(\.modelContext) private var modelContext
     @Environment(\.network) private var network
     @Environment(\.scenePhase) private var scenePhase
@@ -16,8 +17,14 @@ struct TaskListScreen: View {
         VStack {
             VStack {
                 Picker("Filter", selection: $viewModel.selectedFilterItem) {
-                    ForEach(testSource, id: \.self) { item in
-                        Text(item)
+                    ForEach(
+                        [
+                            SyncStatus.any, SyncStatus.pending, SyncStatus.synced,
+                            SyncStatus.conflict,
+                        ],
+                        id: \.self
+                    ) { item in
+                        Text(item.rawValue.description).tag(item)
                     }
                 }
                 .pickerStyle(.automatic)
@@ -34,11 +41,18 @@ struct TaskListScreen: View {
                     HStack {
                         Text(item.title)
                     }
-                    .listRowSeparator(.hidden)
+                    .onTapGesture {
+                        navigator.push(.edit(item))
+                    }
                 }
                 .listStyle(.inset)
+                .refreshable {
+                    guard let storage else { return }
+                    await viewModel.refresh(storage, network)
+                }
             }
         }
+        .navigationTitle("Task List")
         .task {
             if storage == nil {
                 storage = PersistentRepository<TaskEntity, TaskModel>(
@@ -50,16 +64,15 @@ struct TaskListScreen: View {
             viewModel.prepareBackground()
         }
         .onChange(of: scenePhase) {
-            switch scenePhase {
-            case .background:
+            if scenePhase == .background {
                 Task { await viewModel.runBackground() }
-            default:
-                break
             }
         }
     }
 }
 
 #Preview {
-    TaskListScreen(storage: PersistentRepositoryMock<TaskEntity, TaskModel>())
+    NavigationView {
+        TaskListScreen(storage: PersistentRepositoryMock<TaskEntity, TaskModel>())
+    }
 }

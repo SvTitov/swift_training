@@ -1,11 +1,11 @@
 import Foundation
 import SwiftData
 
-enum Priority: Int, Codable {
+enum Priority: String, Codable {
     case low, medium, high
 }
-enum SyncStatus: Int, Codable {
-    case pending, synced, conflict
+enum SyncStatus: String, Codable {
+    case any, pending, synced, conflict
 }
 
 @Model
@@ -43,8 +43,10 @@ extension TaskEntity: EntityProtocol {
 
     convenience init(model: TaskModel) {
         self.init(
-            id: UUID(), remoteId: nil, title: model.title, isCompleted: false, priority: .medium,
-            createdAt: Date.now, updatedAt: Date.now, syncStatus: .pending)
+            id: model.id, remoteId: model.remoteId, title: model.title,
+            isCompleted: model.isCompleted,
+            priority: model.priority,
+            createdAt: model.createdAt, updatedAt: model.updatedAt, syncStatus: model.syncStatus)
     }
 }
 

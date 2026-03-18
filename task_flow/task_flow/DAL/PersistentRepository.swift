@@ -52,13 +52,14 @@ where E.Model == M, M.Entity == E {
         while index < models.count {
             let end = min(index + batchSize, models.count)
             let batch = models[index..<end]
-
+            
             for element in batch {
-                modelContext.insert(E.init(model: element))
+                let entity = E.init(model: element)
+                modelContext.insert(entity)
             }
-
+            
             try modelContext.save()
-
+            
             index = end
 
             await Task.yield()

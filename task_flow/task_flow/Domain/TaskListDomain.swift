@@ -12,7 +12,7 @@ struct TaskListDomain {
         // 3. Merge
         let localData = try await repo.fetchAll()
         let (_, remoteData) = try await remote.get(
-            [TaskDto].self, resource: "https://jsonplaceholder.typicode.com/todos?userId=1")
+            [TaskDto].self, resource: "http://jsonplaceholder.typicode.com/todos?userId=1")
 
         let localIds = Set(localData.compactMap { $0.remoteId })
         let remoteIds = Set(remoteData.map { $0.id })
@@ -42,5 +42,29 @@ struct TaskListDomain {
         }
 
         return localData
+    }
+
+    func syncTasks(
+        repo: any PersistentRepositoryProtocol<TaskEntity, TaskModel>, network: NetworkRepository
+    ) async {
+        let pendingStatus = SyncStatus.pending
+        let predicate = #Predicate<TaskEntity> { item in
+            item.syncStatus == pendingStatus
+        }
+
+        let tasks = try? await repo.fetch(predicate: predicate)
+
+        guard let tasks else { return }
+
+        await withTaskGroup { group in
+            for _ in tasks {
+                group.addTask {
+                    // Fake network request
+                    try? await Task.sleep(for: .seconds(1))
+                }
+            }
+
+            for await _ in group {}
+        }
     }
 }

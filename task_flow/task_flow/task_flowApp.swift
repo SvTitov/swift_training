@@ -7,15 +7,12 @@ class Navigator: NavigatorProtocol {
 
 @main
 struct task_flowApp: App {
-
     @Environment(\.network) var network
 
     var body: some Scene {
         WindowGroup {
             NavigatorView(coordinator: Navigator())
-                .modelContainer(for: [
-                    TaskEntity.self
-                ])
+                .modelContainer(for: TaskEntity.self)
         }
     }
 }
