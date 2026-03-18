@@ -14,16 +14,12 @@ final class TaskListViewModel {
     }
     var filteredList: [TaskModel] = []
     var isLoading = true
+    weak var taskSource: TaskSourceViewModel?
 
     // MARK: Private
     private var cancellables = Set<AnyCancellable>()
     private var onSelectedFilterChanged = CurrentValueSubject<SyncStatus, Never>(.any)
     private let domain = TaskListDomain()
-    private var originList: [TaskModel] = [] {
-        didSet {
-            filteredList = originList
-        }
-    }
     private var bgService: BackgroundService?
 
     init() {
@@ -56,12 +52,13 @@ final class TaskListViewModel {
             }
 
             async let fetching = domain.fetchTasks(repo: storage, remote: network)
-            async let syncTasks = domain.syncTasks(repo: storage, network: network)
+            async let syncTasks: () = domain.syncTasks(repo: storage, network: network)
 
             let (tasks, _) = await (try? fetching, syncTasks)
 
-            if let tasks {
-                originList = tasks
+            if let tasks, let taskSource {
+                taskSource.tasks = tasks
+                filteredList = tasks
             }
         } catch {
             Logger.app.error("Couldn't fetch all data. Error: \(error)")
@@ -77,7 +74,9 @@ final class TaskListViewModel {
     }
 
     private func handleFilterChanged(value: SyncStatus) {
-        filteredList = originList.filter { item in
+        guard let taskSource else { return }
+
+        filteredList = taskSource.tasks.filter { item in
             if value == .any {
                 true
             } else {

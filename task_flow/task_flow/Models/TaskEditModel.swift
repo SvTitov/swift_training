@@ -12,14 +12,22 @@ final class TaskEditModel {
     var updatedAt: Date
     var syncStatus: SyncStatus
 
-    init() {
-        id = UUID()
-        title = ""
-        isCompleted = false
-        priority = .medium
-        createdAt = .now
-        updatedAt = .now
-        syncStatus = .pending
+    init(
+        id: UUID = UUID(),
+        title: String = "",
+        isCompleted: Bool = false,
+        priority: Priority = .medium,
+        createdAt: Date = .now,
+        updateAt: Date = .now,
+        syncStatus: SyncStatus = .any
+    ) {
+        self.id = id
+        self.title = title
+        self.isCompleted = isCompleted
+        self.priority = priority
+        self.createdAt = createdAt
+        self.updatedAt = updateAt
+        self.syncStatus = syncStatus
     }
 
     init(task: TaskModel) {

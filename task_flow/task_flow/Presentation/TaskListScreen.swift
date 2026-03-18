@@ -3,8 +3,7 @@ import SwiftData
 import SwiftUI
 
 struct TaskListScreen: View {
-    @State private var selectedItem: String = "Filter"
-    @Bindable private var viewModel = TaskListViewModel()
+    @State private var viewModel = TaskListViewModel()
 
     @State var storage: (any PersistentRepositoryProtocol<TaskEntity, TaskModel>)?
     @EnvironmentObject var navigator: Navigator
@@ -12,6 +11,7 @@ struct TaskListScreen: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.network) private var network
     @Environment(\.scenePhase) private var scenePhase
+    @Environment(TaskSourceViewModel.self) var taskSource
 
     var body: some View {
         VStack {
@@ -40,6 +40,16 @@ struct TaskListScreen: View {
                 List(viewModel.filteredList) { item in
                     HStack {
                         Text(item.title)
+
+                        Spacer()
+
+                        switch item.syncStatus {
+                        case .conflict: Text("⚠️")
+                        case .pending: Text("⏳")
+                        case .synced: Text("✅")
+                        case .any: EmptyView()
+                        }
+
                     }
                     .onTapGesture {
                         navigator.push(.edit(item))
@@ -53,6 +63,13 @@ struct TaskListScreen: View {
             }
         }
         .navigationTitle("Task List")
+        .toolbar {
+            ToolbarItem(placement: .primaryAction) {
+                Button("Create") {
+                    navigator.push(.create)
+                }
+            }
+        }
         .task {
             if storage == nil {
                 storage = PersistentRepository<TaskEntity, TaskModel>(
@@ -60,6 +77,7 @@ struct TaskListScreen: View {
             }
             guard let storage else { return }
 
+            viewModel.taskSource = taskSource
             await viewModel.onAppear(storage: storage, network: network)
             viewModel.prepareBackground()
         }

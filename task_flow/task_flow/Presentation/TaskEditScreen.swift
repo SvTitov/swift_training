@@ -2,7 +2,12 @@ import Foundation
 import SwiftUI
 
 struct TaskEditScreen: View {
-    @Bindable var viewModel: TaskEditViewModel
+    @State var viewModel: TaskEditViewModel
+    @State var storage: (any PersistentRepositoryProtocol<TaskEntity, TaskModel>)?
+    
+    @Environment(\.modelContext) private var modelContext
+    @Environment(TaskSourceViewModel.self) var taskSource
+    @EnvironmentObject var navigator: Navigator
 
     var body: some View {
         Form {
@@ -12,10 +17,22 @@ struct TaskEditScreen: View {
         }
         .navigationTitle("Edit task")
         .toolbar {
-            ToolbarItem(placement: .primaryAction) {
-                Button("Done") {
-
+            if viewModel.state == TaskEditViewModel.State.createNew {
+                ToolbarItem(placement: .primaryAction) {
+                    Button("Done") {
+                        Task {
+                            guard let storage else { return }
+                            await viewModel.create(storage: storage, taskSource: taskSource)
+                            navigator.pop()
+                        }
+                    }
                 }
+            }
+        }
+        .task {
+            if storage == nil {
+                storage = PersistentRepository<TaskEntity, TaskModel>(
+                    modelContainer: modelContext.container)
             }
         }
     }
