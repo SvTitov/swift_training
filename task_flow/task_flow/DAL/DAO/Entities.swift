@@ -1,8 +1,12 @@
 import Foundation
 import SwiftData
 
-enum Priority: Int, Codable { case low, medium, high }
-enum SyncStatus: Int, Codable { case pending, synced, conflict }
+enum Priority: Int, Codable {
+    case low, medium, high
+}
+enum SyncStatus: Int, Codable {
+    case pending, synced, conflict
+}
 
 @Model
 final class TaskEntity {

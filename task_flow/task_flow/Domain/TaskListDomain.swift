@@ -21,7 +21,17 @@ struct TaskListDomain {
         let newTasks = remoteIds.subtracting(localIds)
 
         let batch = remoteData.filter { newTasks.contains($0.id) }
-            .map { TaskModel.init(title: $0.title, remoteId: $0.id, syncStatus: .synced) }
+            .map {
+                TaskModel.init(
+                    title: $0.title,
+                    remoteId: $0.id,
+                    syncStatus: .synced,
+                    isCompleted: $0.completed,
+                    createdAt: .now,
+                    priority: .low,
+                    updateAt: .now
+                )
+            }
 
         // Insert new tasks
         try await repo.insertBatch(batch)

@@ -1,6 +1,10 @@
 import SwiftData
 import SwiftUI
 
+class Navigator: NavigatorProtocol {
+    @Published var path: NavigationPath = .init()
+}
+
 @main
 struct task_flowApp: App {
 
@@ -8,7 +12,7 @@ struct task_flowApp: App {
 
     var body: some Scene {
         WindowGroup {
-            TaskListScreen()
+            NavigatorView(coordinator: Navigator())
                 .modelContainer(for: [
                     TaskEntity.self
                 ])

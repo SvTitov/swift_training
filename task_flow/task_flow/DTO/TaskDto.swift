@@ -24,6 +24,14 @@ struct TaskDto: Codable {
     }
 
     func mapToModel() -> TaskModel {
-        .init(title: title, remoteId: id, syncStatus: .synced)
+        .init(
+            title: title,
+            remoteId: id,
+            syncStatus: .synced,
+            isCompleted: false,
+            createdAt: .now,
+            priority: .low,
+            updateAt: .now
+        )
     }
 }
