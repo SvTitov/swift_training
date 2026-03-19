@@ -6,11 +6,27 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXContainerItemProxy section */
+		A3A754342F6BF877004FFD4C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A3BBF3C12F605B0500456458 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A3BBF3C82F605B0500456458;
+			remoteInfo = task_flow;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		A3A754302F6BF877004FFD4C /* task_flowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = task_flowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3BBF3C92F605B0500456458 /* task_flow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = task_flow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		A3A754312F6BF877004FFD4C /* task_flowTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = task_flowTests;
+			sourceTree = "<group>";
+		};
 		A3BBF3CB2F605B0500456458 /* task_flow */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = task_flow;
@@ -19,6 +35,13 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		A3A7542D2F6BF877004FFD4C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A3BBF3C62F605B0500456458 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -33,6 +56,7 @@
 			isa = PBXGroup;
 			children = (
 				A3BBF3CB2F605B0500456458 /* task_flow */,
+				A3A754312F6BF877004FFD4C /* task_flowTests */,
 				A3BBF3CA2F605B0500456458 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -41,6 +65,7 @@
 			isa = PBXGroup;
 			children = (
 				A3BBF3C92F605B0500456458 /* task_flow.app */,
+				A3A754302F6BF877004FFD4C /* task_flowTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -48,6 +73,29 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		A3A7542F2F6BF877004FFD4C /* task_flowTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A3A754362F6BF877004FFD4C /* Build configuration list for PBXNativeTarget "task_flowTests" */;
+			buildPhases = (
+				A3A7542C2F6BF877004FFD4C /* Sources */,
+				A3A7542D2F6BF877004FFD4C /* Frameworks */,
+				A3A7542E2F6BF877004FFD4C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A3A754352F6BF877004FFD4C /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				A3A754312F6BF877004FFD4C /* task_flowTests */,
+			);
+			name = task_flowTests;
+			packageProductDependencies = (
+			);
+			productName = task_flowTests;
+			productReference = A3A754302F6BF877004FFD4C /* task_flowTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		A3BBF3C82F605B0500456458 /* task_flow */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A3BBF3D42F605B0600456458 /* Build configuration list for PBXNativeTarget "task_flow" */;
@@ -80,6 +128,10 @@
 				LastSwiftUpdateCheck = 1630;
 				LastUpgradeCheck = 1630;
 				TargetAttributes = {
+					A3A7542F2F6BF877004FFD4C = {
+						CreatedOnToolsVersion = 16.3;
+						TestTargetID = A3BBF3C82F605B0500456458;
+					};
 					A3BBF3C82F605B0500456458 = {
 						CreatedOnToolsVersion = 16.3;
 					};
@@ -100,11 +152,19 @@
 			projectRoot = "";
 			targets = (
 				A3BBF3C82F605B0500456458 /* task_flow */,
+				A3A7542F2F6BF877004FFD4C /* task_flowTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		A3A7542E2F6BF877004FFD4C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A3BBF3C72F605B0500456458 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -115,6 +175,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		A3A7542C2F6BF877004FFD4C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A3BBF3C52F605B0500456458 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -124,7 +191,51 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		A3A754352F6BF877004FFD4C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A3BBF3C82F605B0500456458 /* task_flow */;
+			targetProxy = A3A754342F6BF877004FFD4C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		A3A754372F6BF877004FFD4C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9L5B778RDS;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sweetpills.task-flowTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/task_flow.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/task_flow";
+			};
+			name = Debug;
+		};
+		A3A754382F6BF877004FFD4C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9L5B778RDS;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sweetpills.task-flowTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/task_flow.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/task_flow";
+			};
+			name = Release;
+		};
 		A3BBF3D22F605B0600456458 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -313,6 +424,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		A3A754362F6BF877004FFD4C /* Build configuration list for PBXNativeTarget "task_flowTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A3A754372F6BF877004FFD4C /* Debug */,
+				A3A754382F6BF877004FFD4C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		A3BBF3C42F605B0500456458 /* Build configuration list for PBXProject "task_flow" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
