@@ -64,6 +64,12 @@ class CoinCell: UITableViewCell {
         return stack
     }()
 
+    lazy var loadingView: UIActivityIndicatorView = {
+        let refresh = UIActivityIndicatorView(style: .medium)
+        refresh.translatesAutoresizingMaskIntoConstraints = false
+        return refresh
+    }()
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
@@ -74,6 +80,7 @@ class CoinCell: UITableViewCell {
         contentView.addSubview(icon)
         contentView.addSubview(leftContainer)
         contentView.addSubview(rightContainer)
+        contentView.addSubview(loadingView)
 
         NSLayoutConstraint.activate([
             icon.leadingAnchor.constraint(
@@ -91,14 +98,32 @@ class CoinCell: UITableViewCell {
             rightContainer.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             rightContainer.leadingAnchor.constraint(
                 greaterThanOrEqualTo: leftContainer.trailingAnchor, constant: 12),
+
+            loadingView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            loadingView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+
         ])
     }
 
-    func populate() {
-        title.text = "Title"
-        symbol.text = "Symbol"
-        price.text = "Price"
-        changes.text = "Changes"
+    func populate(_ model: MarketModel) {
+        loadingView.stopAnimating()
+        title.isHidden = false
+        symbol.isHidden = false
+        price.isHidden = false
+        changes.isHidden = false
+
+        title.text = model.name
+        symbol.text = model.symbol
+        price.text = "\(model.price)"
+        changes.text = "\(model.priceChange24H)"
+    }
+
+    func loadingState() {
+        loadingView.startAnimating()
+        title.isHidden = true
+        symbol.isHidden = true
+        price.isHidden = true
+        changes.isHidden = true
     }
 
     override func prepareForReuse() {
@@ -113,6 +138,5 @@ class CoinCell: UITableViewCell {
 
 #Preview {
     let cell = CoinCell()
-    cell.populate()
     return cell
 }

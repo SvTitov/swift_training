@@ -10,10 +10,17 @@ class CoinsListScreen: UIViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 100
         tableView.rowHeight = 100
+
+        let refresh = UIRefreshControl()
+        refresh.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        tableView.refreshControl = refresh
+
         return tableView
     }()
 
-    let myList: [String] = [""]
+    var isLoading = false
+
+    let viewModel = CoinsListViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +34,26 @@ class CoinsListScreen: UIViewController {
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ])
+
+        refreshData()
+    }
+
+    @objc func refreshData() {
+        Task {
+            isLoading = true
+
+            do {
+                try await viewModel.fetch()
+            } catch {
+                print("Error: \(error)")
+            }
+
+            await MainActor.run {
+                self.isLoading = false
+                self.tableView.reloadData()
+                self.tableView.refreshControl?.endRefreshing()
+            }
+        }
     }
 
     private func createLayout() -> UICollectionViewLayout {
@@ -53,13 +80,21 @@ class CoinsListScreen: UIViewController {
 
 extension CoinsListScreen: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        myList.count
+        viewModel.coinModels.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell =
             tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CoinCell
-        cell.populate()
+
+        let model = viewModel.coinModels[indexPath.row]
+
+        if isLoading {
+            cell.loadingState()
+        } else {
+            cell.populate(model)
+        }
+
         return cell
     }
 }
