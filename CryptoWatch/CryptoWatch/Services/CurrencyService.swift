@@ -9,6 +9,7 @@ actor CurrencyService {
 
     enum ServiceError: Error {
         case userDataIssue
+        case parseIssue
     }
 
     private var inMemoryCache: [String: CacheData] = [:]
@@ -32,10 +33,12 @@ actor CurrencyService {
         if cacheValue.updateAt < threshold {
             // Need refresh
             let (statusCode, markets) = try await networkRepository.get(
-                [MarketDto].self,
+                [MarketDto]?.self,
                 resource: Endpoints.baseUrl.rawValue + Endpoints.current.rawValue)
 
             guard statusCode == 200 else { throw ServiceError.userDataIssue }
+
+            guard let markets else { throw ServiceError.parseIssue }
 
             cacheValue.refreshData(data: markets)
         }

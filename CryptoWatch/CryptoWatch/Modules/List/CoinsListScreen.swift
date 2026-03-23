@@ -1,11 +1,13 @@
 import UIKit
 
+@MainActor
 class CoinsListScreen: UIViewController {
     private lazy var tableView: UITableView = {
         let layout = createLayout()
         let tableView = UITableView(frame: .zero, style: .plain)
         tableView.backgroundColor = .systemBackground
         tableView.dataSource = self
+        tableView.delegate = self
         tableView.register(CoinCell.self, forCellReuseIdentifier: "cell")
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 100
@@ -48,11 +50,9 @@ class CoinsListScreen: UIViewController {
                 print("Error: \(error)")
             }
 
-            await MainActor.run {
-                self.isLoading = false
-                self.tableView.reloadData()
-                self.tableView.refreshControl?.endRefreshing()
-            }
+            self.isLoading = false
+            self.tableView.reloadData()
+            self.tableView.refreshControl?.endRefreshing()
         }
     }
 
@@ -96,6 +96,16 @@ extension CoinsListScreen: UITableViewDataSource {
         }
 
         return cell
+    }
+}
+
+extension CoinsListScreen: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let model = viewModel.coinModels[indexPath.row]
+        let viewController = CoinDetailScreen()
+        viewController.marketModel = model
+        navigationController?.pushViewController(viewController, animated: false)
     }
 }
 

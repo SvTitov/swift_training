@@ -1,17 +1,17 @@
 struct MarketDto: Codable {
-    let id, symbol, name: String
-    let image: String
-    let currentPrice: Double
-    let marketCap, marketCapRank, fullyDilutedValuation, totalVolume: Int
-    let high24H, low24H, priceChange24H, priceChangePercentage24H: Double
-    let marketCapChange24H, marketCapChangePercentage24H, circulatingSupply, totalSupply: Double
+    let id, symbol, name: String?
+    let image: String?
+    let currentPrice: Double?
+    let marketCap, marketCapRank, fullyDilutedValuation: Int?
+    let high24H, low24H, priceChange24H, priceChangePercentage24H, totalVolume: Double?
+    let marketCapChange24H, marketCapChangePercentage24H, circulatingSupply, totalSupply: Double?
     let maxSupply: Double?
-    let ath, athChangePercentage: Double
-    let athDate: String
-    let atl, atlChangePercentage: Double
-    let atlDate: String
+    let ath, athChangePercentage: Double?
+    let athDate: String?
+    let atl, atlChangePercentage: Double?
+    let atlDate: String?
     let roi: Roi?
-    let lastUpdated: String
+    let lastUpdated: String?
 
     enum CodingKeys: String, CodingKey {
         case id, symbol, name, image

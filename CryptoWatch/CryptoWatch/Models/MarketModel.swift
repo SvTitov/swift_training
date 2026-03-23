@@ -6,10 +6,10 @@ struct MarketModel {
     var priceChange24H: Double = 0.0
 
     init(from: MarketDto) {
-        name = from.name
-        symbol = from.symbol
-        icon = from.image
-        price = from.currentPrice
-        priceChange24H = from.priceChange24H
+        name = from.name ?? ""
+        symbol = from.symbol ?? ""
+        icon = from.image ?? ""
+        price = from.currentPrice ?? 0
+        priceChange24H = from.priceChange24H ?? 0.0
     }
 }

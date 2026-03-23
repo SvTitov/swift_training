@@ -13,10 +13,12 @@ final actor NetworkRepository {
     }
 
     private lazy var session: URLSession = {
-        let config = URLSessionConfiguration.default
-        config.timeoutIntervalForRequest = TimeInterval(30)
-        config.requestCachePolicy = .reloadIgnoringLocalCacheData
+        let config = URLSessionConfiguration.ephemeral
+        config.timeoutIntervalForRequest = 60
+        config.timeoutIntervalForResource = 300
+        config.requestCachePolicy = .reloadRevalidatingCacheData
         config.urlCache = nil
+        config.waitsForConnectivity = true
 
         return URLSession(configuration: config)
     }()
@@ -29,6 +31,10 @@ final actor NetworkRepository {
         -> (Int, T)
     {
         return try await request(T.self, resource: resource, method: .post, body: body)
+    }
+
+    public func sharedSessions() -> URLSession {
+        session
     }
 
     private func request<T: Codable>(resource: String, method: Method) async throws -> (Int, T) {

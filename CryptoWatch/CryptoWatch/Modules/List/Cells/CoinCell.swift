@@ -5,7 +5,6 @@ class CoinCell: UITableViewCell {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.backgroundColor = .systemGray
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -76,7 +75,10 @@ class CoinCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupUI()
+    }
 
+    func setupUI() {
         contentView.addSubview(icon)
         contentView.addSubview(leftContainer)
         contentView.addSubview(rightContainer)
@@ -106,6 +108,7 @@ class CoinCell: UITableViewCell {
     }
 
     func populate(_ model: MarketModel) {
+        icon.loadImage(urlString: model.icon)
         loadingView.stopAnimating()
         title.isHidden = false
         symbol.isHidden = false
