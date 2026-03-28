@@ -1,0 +1,18 @@
+[package]
+name = "gRPC-Chat-Server"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+tonic = "*"
+prost = "*"
+tonic-prost = "*"
+tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
+tokio-stream = "*"
+
+[dependencies.uuid]
+version = "1.22.0"
+features = ["v4"]
+
+[build-dependencies]
+tonic-prost-build = "*"

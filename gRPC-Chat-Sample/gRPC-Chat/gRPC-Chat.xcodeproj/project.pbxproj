@@ -1,0 +1,596 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A32823F42F744A61003B2D54 /* chat.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32823F22F744A61003B2D54 /* chat.grpc.swift */; };
+		A32823F52F744A61003B2D54 /* chat.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32823F32F744A61003B2D54 /* chat.pb.swift */; };
+		A34483152F73BE6100D6FD05 /* GRPCCodeGen in Frameworks */ = {isa = PBXBuildFile; productRef = A34483142F73BE6100D6FD05 /* GRPCCodeGen */; };
+		A34483172F73BE6100D6FD05 /* GRPCCore in Frameworks */ = {isa = PBXBuildFile; productRef = A34483162F73BE6100D6FD05 /* GRPCCore */; };
+		A34483192F73BE6100D6FD05 /* GRPCInProcessTransport in Frameworks */ = {isa = PBXBuildFile; productRef = A34483182F73BE6100D6FD05 /* GRPCInProcessTransport */; };
+		A34483232F73BF4000D6FD05 /* GRPCProtobuf in Frameworks */ = {isa = PBXBuildFile; productRef = A34483222F73BF4000D6FD05 /* GRPCProtobuf */; };
+		A344832A2F73C16800D6FD05 /* login.proto in Sources */ = {isa = PBXBuildFile; fileRef = A34483292F73C16800D6FD05 /* login.proto */; };
+		A344832B2F73C16800D6FD05 /* chat.proto in Sources */ = {isa = PBXBuildFile; fileRef = A34483282F73C16800D6FD05 /* chat.proto */; };
+		A344832E2F73CE0700D6FD05 /* login.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = A344832C2F73CE0700D6FD05 /* login.pb.swift */; };
+		A34483312F73D71100D6FD05 /* GRPCNIOTransportHTTP2 in Frameworks */ = {isa = PBXBuildFile; productRef = A34483302F73D71100D6FD05 /* GRPCNIOTransportHTTP2 */; };
+		A34483332F73D71100D6FD05 /* GRPCNIOTransportHTTP2Posix in Frameworks */ = {isa = PBXBuildFile; productRef = A34483322F73D71100D6FD05 /* GRPCNIOTransportHTTP2Posix */; };
+		A34483352F73D71100D6FD05 /* GRPCNIOTransportHTTP2TransportServices in Frameworks */ = {isa = PBXBuildFile; productRef = A34483342F73D71100D6FD05 /* GRPCNIOTransportHTTP2TransportServices */; };
+		A39A950C2F7405BB00B4730A /* login.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = A39A950B2F7405BB00B4730A /* login.grpc.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A344834B2F74037400D6FD05 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A3F4D6342F72828200B22178 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A3F4D63B2F72828200B22178;
+			remoteInfo = "gRPC-Chat";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		A32823F22F744A61003B2D54 /* chat.grpc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chat.grpc.swift; sourceTree = "<group>"; };
+		A32823F32F744A61003B2D54 /* chat.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chat.pb.swift; sourceTree = "<group>"; };
+		A34483282F73C16800D6FD05 /* chat.proto */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.protobuf; name = chat.proto; path = "../gRPC-Chat-Shared/chat.proto"; sourceTree = SOURCE_ROOT; };
+		A34483292F73C16800D6FD05 /* login.proto */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.protobuf; name = login.proto; path = "../gRPC-Chat-Shared/login.proto"; sourceTree = SOURCE_ROOT; };
+		A344832C2F73CE0700D6FD05 /* login.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = login.pb.swift; sourceTree = "<group>"; };
+		A34483472F74037400D6FD05 /* gRPC-ChatTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "gRPC-ChatTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A39A950B2F7405BB00B4730A /* login.grpc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = login.grpc.swift; sourceTree = "<group>"; };
+		A3F4D63C2F72828200B22178 /* gRPC-Chat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "gRPC-Chat.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		A311AE942F74133B006FEE1F /* Exceptions for "gRPC-Chat" folder in "gRPC-Chat" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = A3F4D63B2F72828200B22178 /* gRPC-Chat */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		A34483482F74037400D6FD05 /* gRPC-ChatTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "gRPC-ChatTests";
+			sourceTree = "<group>";
+		};
+		A3F4D63E2F72828200B22178 /* gRPC-Chat */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				A311AE942F74133B006FEE1F /* Exceptions for "gRPC-Chat" folder in "gRPC-Chat" target */,
+			);
+			path = "gRPC-Chat";
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A34483442F74037400D6FD05 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A3F4D6392F72828200B22178 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A34483352F73D71100D6FD05 /* GRPCNIOTransportHTTP2TransportServices in Frameworks */,
+				A34483232F73BF4000D6FD05 /* GRPCProtobuf in Frameworks */,
+				A34483152F73BE6100D6FD05 /* GRPCCodeGen in Frameworks */,
+				A34483172F73BE6100D6FD05 /* GRPCCore in Frameworks */,
+				A34483312F73D71100D6FD05 /* GRPCNIOTransportHTTP2 in Frameworks */,
+				A34483332F73D71100D6FD05 /* GRPCNIOTransportHTTP2Posix in Frameworks */,
+				A34483192F73BE6100D6FD05 /* GRPCInProcessTransport in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A344832D2F73CE0700D6FD05 /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				A32823F22F744A61003B2D54 /* chat.grpc.swift */,
+				A32823F32F744A61003B2D54 /* chat.pb.swift */,
+				A39A950B2F7405BB00B4730A /* login.grpc.swift */,
+				A344832C2F73CE0700D6FD05 /* login.pb.swift */,
+			);
+			path = Generated;
+			sourceTree = "<group>";
+		};
+		A3F4D6332F72828200B22178 = {
+			isa = PBXGroup;
+			children = (
+				A344832D2F73CE0700D6FD05 /* Generated */,
+				A34483282F73C16800D6FD05 /* chat.proto */,
+				A34483292F73C16800D6FD05 /* login.proto */,
+				A3F4D63E2F72828200B22178 /* gRPC-Chat */,
+				A34483482F74037400D6FD05 /* gRPC-ChatTests */,
+				A3F4D63D2F72828200B22178 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A3F4D63D2F72828200B22178 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A3F4D63C2F72828200B22178 /* gRPC-Chat.app */,
+				A34483472F74037400D6FD05 /* gRPC-ChatTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A34483462F74037400D6FD05 /* gRPC-ChatTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A344834D2F74037400D6FD05 /* Build configuration list for PBXNativeTarget "gRPC-ChatTests" */;
+			buildPhases = (
+				A34483432F74037400D6FD05 /* Sources */,
+				A34483442F74037400D6FD05 /* Frameworks */,
+				A34483452F74037400D6FD05 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A344834C2F74037400D6FD05 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				A34483482F74037400D6FD05 /* gRPC-ChatTests */,
+			);
+			name = "gRPC-ChatTests";
+			packageProductDependencies = (
+			);
+			productName = "gRPC-ChatTests";
+			productReference = A34483472F74037400D6FD05 /* gRPC-ChatTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		A3F4D63B2F72828200B22178 /* gRPC-Chat */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A3F4D6472F72828300B22178 /* Build configuration list for PBXNativeTarget "gRPC-Chat" */;
+			buildPhases = (
+				A3F4D6382F72828200B22178 /* Sources */,
+				A3F4D6392F72828200B22178 /* Frameworks */,
+				A3F4D63A2F72828200B22178 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				A3F4D63E2F72828200B22178 /* gRPC-Chat */,
+			);
+			name = "gRPC-Chat";
+			packageProductDependencies = (
+				A34483142F73BE6100D6FD05 /* GRPCCodeGen */,
+				A34483162F73BE6100D6FD05 /* GRPCCore */,
+				A34483182F73BE6100D6FD05 /* GRPCInProcessTransport */,
+				A34483222F73BF4000D6FD05 /* GRPCProtobuf */,
+				A34483302F73D71100D6FD05 /* GRPCNIOTransportHTTP2 */,
+				A34483322F73D71100D6FD05 /* GRPCNIOTransportHTTP2Posix */,
+				A34483342F73D71100D6FD05 /* GRPCNIOTransportHTTP2TransportServices */,
+			);
+			productName = "gRPC-Chat";
+			productReference = A3F4D63C2F72828200B22178 /* gRPC-Chat.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A3F4D6342F72828200B22178 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1630;
+				LastUpgradeCheck = 1630;
+				TargetAttributes = {
+					A34483462F74037400D6FD05 = {
+						CreatedOnToolsVersion = 16.3;
+						TestTargetID = A3F4D63B2F72828200B22178;
+					};
+					A3F4D63B2F72828200B22178 = {
+						CreatedOnToolsVersion = 16.3;
+					};
+				};
+			};
+			buildConfigurationList = A3F4D6372F72828200B22178 /* Build configuration list for PBXProject "gRPC-Chat" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A3F4D6332F72828200B22178;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				A34483132F73BE6100D6FD05 /* XCRemoteSwiftPackageReference "grpc-swift-2" */,
+				A34483212F73BF4000D6FD05 /* XCRemoteSwiftPackageReference "grpc-swift-protobuf" */,
+				A344832F2F73D71100D6FD05 /* XCRemoteSwiftPackageReference "grpc-swift-nio-transport" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = A3F4D63D2F72828200B22178 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A3F4D63B2F72828200B22178 /* gRPC-Chat */,
+				A34483462F74037400D6FD05 /* gRPC-ChatTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A34483452F74037400D6FD05 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A3F4D63A2F72828200B22178 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A34483432F74037400D6FD05 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A3F4D6382F72828200B22178 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A344832E2F73CE0700D6FD05 /* login.pb.swift in Sources */,
+				A32823F42F744A61003B2D54 /* chat.grpc.swift in Sources */,
+				A32823F52F744A61003B2D54 /* chat.pb.swift in Sources */,
+				A344832A2F73C16800D6FD05 /* login.proto in Sources */,
+				A39A950C2F7405BB00B4730A /* login.grpc.swift in Sources */,
+				A344832B2F73C16800D6FD05 /* chat.proto in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A344834C2F74037400D6FD05 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A3F4D63B2F72828200B22178 /* gRPC-Chat */;
+			targetProxy = A344834B2F74037400D6FD05 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		A344834E2F74037400D6FD05 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9L5B778RDS;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sweetpills.gRPC-ChatTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/gRPC-Chat.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/gRPC-Chat";
+			};
+			name = Debug;
+		};
+		A344834F2F74037400D6FD05 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9L5B778RDS;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sweetpills.gRPC-ChatTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/gRPC-Chat.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/gRPC-Chat";
+			};
+			name = Release;
+		};
+		A3F4D6452F72828300B22178 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 9L5B778RDS;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		A3F4D6462F72828300B22178 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 9L5B778RDS;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A3F4D6482F72828300B22178 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9L5B778RDS;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "gRPC-Chat/Info.plist";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sweetpills.gRPC-Chat";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A3F4D6492F72828300B22178 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9L5B778RDS;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "gRPC-Chat/Info.plist";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sweetpills.gRPC-Chat";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A344834D2F74037400D6FD05 /* Build configuration list for PBXNativeTarget "gRPC-ChatTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A344834E2F74037400D6FD05 /* Debug */,
+				A344834F2F74037400D6FD05 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A3F4D6372F72828200B22178 /* Build configuration list for PBXProject "gRPC-Chat" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A3F4D6452F72828300B22178 /* Debug */,
+				A3F4D6462F72828300B22178 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A3F4D6472F72828300B22178 /* Build configuration list for PBXNativeTarget "gRPC-Chat" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A3F4D6482F72828300B22178 /* Debug */,
+				A3F4D6492F72828300B22178 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A34483132F73BE6100D6FD05 /* XCRemoteSwiftPackageReference "grpc-swift-2" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/grpc/grpc-swift-2.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.3.0;
+			};
+		};
+		A34483212F73BF4000D6FD05 /* XCRemoteSwiftPackageReference "grpc-swift-protobuf" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/grpc/grpc-swift-protobuf.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.2.1;
+			};
+		};
+		A344832F2F73D71100D6FD05 /* XCRemoteSwiftPackageReference "grpc-swift-nio-transport" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/grpc/grpc-swift-nio-transport.git";
+			requirement = {
+				kind = exactVersion;
+				version = 2.4.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A34483142F73BE6100D6FD05 /* GRPCCodeGen */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A34483132F73BE6100D6FD05 /* XCRemoteSwiftPackageReference "grpc-swift-2" */;
+			productName = GRPCCodeGen;
+		};
+		A34483162F73BE6100D6FD05 /* GRPCCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A34483132F73BE6100D6FD05 /* XCRemoteSwiftPackageReference "grpc-swift-2" */;
+			productName = GRPCCore;
+		};
+		A34483182F73BE6100D6FD05 /* GRPCInProcessTransport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A34483132F73BE6100D6FD05 /* XCRemoteSwiftPackageReference "grpc-swift-2" */;
+			productName = GRPCInProcessTransport;
+		};
+		A34483222F73BF4000D6FD05 /* GRPCProtobuf */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A34483212F73BF4000D6FD05 /* XCRemoteSwiftPackageReference "grpc-swift-protobuf" */;
+			productName = GRPCProtobuf;
+		};
+		A34483302F73D71100D6FD05 /* GRPCNIOTransportHTTP2 */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A344832F2F73D71100D6FD05 /* XCRemoteSwiftPackageReference "grpc-swift-nio-transport" */;
+			productName = GRPCNIOTransportHTTP2;
+		};
+		A34483322F73D71100D6FD05 /* GRPCNIOTransportHTTP2Posix */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A344832F2F73D71100D6FD05 /* XCRemoteSwiftPackageReference "grpc-swift-nio-transport" */;
+			productName = GRPCNIOTransportHTTP2Posix;
+		};
+		A34483342F73D71100D6FD05 /* GRPCNIOTransportHTTP2TransportServices */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A344832F2F73D71100D6FD05 /* XCRemoteSwiftPackageReference "grpc-swift-nio-transport" */;
+			productName = GRPCNIOTransportHTTP2TransportServices;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = A3F4D6342F72828200B22178 /* Project object */;
+}
